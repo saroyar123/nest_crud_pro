@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config/dist';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './user/entities/user.entity';
+import { UserModule } from './user/user.module';
 
 
 @Module({
@@ -19,11 +21,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [],
-        synchronize: configService.get<boolean>('DB_SYNC')
+        entities: [User],
+        synchronize: true,
+        logging:true
       }),
       inject: [ConfigService],
-    })
+    }),
+
+    UserModule
   ],
   controllers: [],
   providers: [],
