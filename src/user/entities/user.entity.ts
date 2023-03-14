@@ -6,6 +6,9 @@ export class User {
     id:Number;
 
     @Column()
+    email:string;
+
+    @Column()
     firstName:String;
 
     @Column()
